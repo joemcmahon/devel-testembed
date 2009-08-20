@@ -1,13 +1,15 @@
 package Devel::TestEmbed;
 
-$Devel::TestEmbed::VERSION = 1.2;
+$Devel::TestEmbed::VERSION = 1.3;
 
 # Dump just the tests
 sub DB::tdump(@) {
   my $outfile = shift || "unnamed_test.t";
   my %test_names = map { $_ => 1 } get_test_names() 
     unless keys %test_names;
+
   print DB::OUT "Recording tests for this session in $outfile ...";
+
   unless (open TFH, ">$outfile") {
      print DB::OUT " can't write history: $!\n";
   }
@@ -20,7 +22,8 @@ sub DB::tdump(@) {
     while (@lines) {
       my $line = shift @lines;
       my $forced_capture = 0;
-      # Following lines are comments?
+      # If comments follow the current line, force
+      # it to be captured, and save the comments too.
       if (@lines) { 
         while ($lines[0] =~ /^\s*#/) {
           # Yes. Print and discard.

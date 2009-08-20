@@ -1,4 +1,12 @@
-Revision history for Perl module String::Edit
+Revision history for Perl module Devel::TestEmbed
+
+4 June 22, 2005
+  - speed hack for watchfunction(); only insert 
+    tdump into the current package if debugger is
+    gaining control
+  - fix header on this file
+  - clarify comments and add more whitespace
+
 3 October 23, 2004
   - Added skip for unwritable file test if effective UID is 0
   - Added default file for output if none is specified

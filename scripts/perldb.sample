@@ -1,6 +1,3 @@
-# Copy this file to .perldb in your home directory on Linux, or to 
-# XXX what? on Windows.
-
 # This function forces the load of Test::More and enables the watchfunction.
 sub afterinit {
   use Devel::TestEmbed;
@@ -9,7 +6,8 @@ sub afterinit {
 }
 
 sub watchfunction {
-  eval "*".__PACKAGE__."::tdump = \\&tdump";
+  eval "*".__PACKAGE__."::tdump = \\&tdump"
+    if $single || ( $trace & 1 );
   1;
 }
 

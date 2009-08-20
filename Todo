@@ -1,5 +1,6 @@
 TODO list for Perl module Devel::TestEmbed
 
 - Transform this into a plugin-based externsion framework for the debugger
+  (Done: see Devel::Command for an example of how to do this)
 
 
