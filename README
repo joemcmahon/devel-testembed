@@ -1,0 +1,48 @@
+Devel::TestEmbed demonstrates a way of adding new commands to the debugger
+without actually modifying the debugger at all.
+
+It automatically loads Test::More for you, then simulates a new command,
+tdump, via the debugger's afterinit() and watchfunction() hooks (along with
+some magic involving __PACKAGE__ and eval'ed glob assignments).
+
+If you use Test::More's tests (is(), ok(), etc.) during a debugger session,
+tdump can then dump the tests out to a test file (you pick a name) with the
+proper test plan already in place.
+
+Like this:
+
+  DB<5> use_ok("MyModule");
+ok 1 - use MyModule;
+
+  DB<6> $arg1 = "something";
+
+  DB<7> # set first argument
+
+  DB<8> $arg2 = "yadda yadda";
+
+  DB<9> # Set second argument
+
+  DB<10> $try_it = MyModule->new($arg1, $arg2)
+
+  DB<11> # Create an object
+
+  DB<12> isa_ok($try_it, "MyModule")
+
+  DB<13> tdump "001basic.t"
+Recording tests for this session in 001basic.t ... done (2 tests).
+
+  DB<14>
+
+tdump will follow you from file to file and will always be available, no
+matter what namespace you are in.
+
+To install:
+
+  perl Makefile.PL
+  make
+  make test
+  make install
+  cp scripts/perldb.sample ${HOME}/.perldb
+
+Windows users should copy the perldb.sample file to perldb.ini.
+

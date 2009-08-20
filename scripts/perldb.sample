@@ -1,0 +1,16 @@
+# Copy this file to .perldb in your home directory on Linux, or to 
+# XXX what? on Windows.
+
+# This function forces the load of Test::More and enables the watchfunction.
+sub afterinit {
+  use Devel::TestEmbed;
+  push @DB::typeahead, 'use Test::More qw(no_plan)';
+  $trace |= 4;
+}
+
+sub watchfunction {
+  eval "*".__PACKAGE__."::tdump = \\&tdump";
+  1;
+}
+
+1;
