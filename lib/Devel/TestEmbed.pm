@@ -1,12 +1,12 @@
 package Devel::TestEmbed;
+use strict;
 
-$Devel::TestEmbed::VERSION = 1.4;
+$Devel::TestEmbed::VERSION = 1.5;
 
 # Dump just the tests
 sub DB::tdump(@) {
   my $outfile = shift || "unnamed_test.t";
-  my %test_names = map { $_ => 1 } _get_test_names() 
-    unless keys %test_names;
+  my %test_names = map { $_ => 1 } _get_test_names();
 
   print DB::OUT "Recording tests for this session in $outfile ...";
 
@@ -65,7 +65,7 @@ sub _is_a_sub {
 sub _is_a_test {
   local $_    = shift;
   my    $map  = shift;
-  if (($possible, $paren) = /^\s*(\w+)\(/) {
+  if (my($possible, $paren) = /^\s*(\w+)\(/) {
     return $map->{$possible};
   }
 }

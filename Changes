@@ -1,5 +1,11 @@
 Revision history for Perl module Devel::TestEmbed
 
+5 September 9, 2005
+  - Added 'use strict' to the module, fixed some 
+    minor strict problems
+  - Altered sample .perldb to not override tdump()
+    if it already exists in the current namespace
+
 4 June 22, 2005
   - speed hack for watchfunction(); only insert 
     tdump into the current package if debugger is

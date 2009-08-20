@@ -1,13 +1,16 @@
 # This function forces the load of Test::More and enables the watchfunction.
+
 sub afterinit {
   use Devel::TestEmbed;
   push @DB::typeahead, 'use Test::More qw(no_plan)';
+
+  # Enable watchfunction().
   $trace |= 4;
 }
 
 sub watchfunction {
   eval "*".__PACKAGE__."::tdump = \\&tdump"
-    if $single || ( $trace & 1 );
+    if ($single || ( $trace & 1 )) && ! defined(\&tdump);
   1;
 }
 
