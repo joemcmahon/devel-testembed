@@ -1,4 +1,8 @@
 Revision history for Perl module String::Edit
 
+2 October 22, 2004
+  - Made sure $VERSION was set in Devel/TestEmbed.pm
+  - Added pointer to presentation
+
 1 October 22, 2004
   - initial version; packaged for CPAN

@@ -46,3 +46,6 @@ To install:
 
 Windows users should copy the perldb.sample file to perldb.ini.
 
+If you're interested in seeing a presentation on how this works, go to 
+http://ibiblio.org/mcmahon/lazy_testing.html - Firefox is recommended for
+viewing this presentation; Safari will stop showing slides after a while.

@@ -1,5 +1,7 @@
 package Devel::TestEmbed;
 
+$Devel::TestEmbed::VERSION = 1.1;
+
 # Dump just the tests
 sub DB::tdump(@) {
   my $outfile = shift;
