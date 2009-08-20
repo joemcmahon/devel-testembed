@@ -1,7 +1,7 @@
 use Test::More tests=>4;
 
 use Devel::TestEmbed;
-my @a = Devel::TestEmbed::get_test_names();
+my @a = Devel::TestEmbed::_get_test_names();
 
 ok(int @a, "Found some tests");
 

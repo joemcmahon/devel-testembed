@@ -1,19 +1,16 @@
 use Test::More tests=>53;
 use Devel::TestEmbed;
 
-tie *OUT, 'Capture';
-open OUT, "dummy - not actually opened";
-$contents = tied *OUT;
-
-# We have to "export" this filehandle if we want it to be seen.
-*DB::OUT = \*main::OUT;
+tie *DB::OUT, 'Capture';
+open (DB::OUT, "dummy - not actually opened");
+$contents = tied *DB::OUT;
 
 sub erase {
-  close OUT;
   @DB::hist = ();
   unlink "t/check.output" or die "Can't unlink check.output: $!\n"
     if -e "t/check.output";
-  open OUT, "reopen for capture";
+  close DB::OUT;
+  open (DB::OUT, "reopen for capture");
 }
 
 sub slurp {
@@ -33,13 +30,13 @@ erase;
 
 # Test 1: empty.
 DB::tdump("t/check.output");
+ok($contents->contents, "got a message");
+is($$contents, qq[Recording tests for this session in t/check.output ... done (0 tests).\n],
+     "expected message ok");
 @lines = slurp();
 ok(int @lines, "Something there");
 is(int @lines, 1, "one line as expected");
 is($lines[0], "use Test::More tests=>0;\n", "the output expected");
-ok($$contents, "got a message");
-is($$contents, qq[Recording tests for this session in t/check.output ... done (0 tests).\n],
-     "expected message ok");
 erase;
 
 # Test 2: some input, but none of it tests.
@@ -270,6 +267,7 @@ END {
 
 package Capture;
 use Tie::Handle;
+use Test::More;
  
 sub TIEHANDLE {
   my $class = shift;
@@ -292,4 +290,7 @@ sub FILENO {
  "Not really a file";
 }
 
-sub CLOSE { }
+sub CLOSE { 
+}
+
+sub contents { ${shift()} }

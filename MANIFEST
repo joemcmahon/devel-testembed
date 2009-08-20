@@ -9,6 +9,8 @@ t/002_is_a_test.t
 t/003_is_a_sub.t
 t/004_get_test_names.t
 t/005_tdump.t
+t/pod.t
+t/pod-coverage.t
 Makefile.PL
 scripts/perldb.sample
 META.yml                                 Module meta-data (added by MakeMaker)
