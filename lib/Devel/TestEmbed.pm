@@ -1,10 +1,10 @@
 package Devel::TestEmbed;
 
-$Devel::TestEmbed::VERSION = 1.1;
+$Devel::TestEmbed::VERSION = 1.2;
 
 # Dump just the tests
 sub DB::tdump(@) {
-  my $outfile = shift;
+  my $outfile = shift || "unnamed_test.t";
   my %test_names = map { $_ => 1 } get_test_names() 
     unless keys %test_names;
   print DB::OUT "Recording tests for this session in $outfile ...";

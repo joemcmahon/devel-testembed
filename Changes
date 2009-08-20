@@ -1,4 +1,7 @@
 Revision history for Perl module String::Edit
+3 October 23, 2004
+  - Added skip for unwritable file test if effective UID is 0
+  - Added default file for output if none is specified
 
 2 October 22, 2004
   - Made sure $VERSION was set in Devel/TestEmbed.pm
